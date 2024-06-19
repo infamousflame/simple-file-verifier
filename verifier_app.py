@@ -62,7 +62,7 @@ class VerifierApp(App):
         digest: tuple[str, int] = hasher.compute_digest()
         match digest[1]:
             case 0:
-                self.hash_sum_output.text = hasher.compute_digest()[0]
+                self.hash_sum_output.text = digest[0]
             case 1:
                 self.hash_sum_output.text = 'File not found'
             case 2:
