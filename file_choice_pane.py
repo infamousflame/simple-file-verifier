@@ -44,7 +44,7 @@ class FileChoicePane(BoxLayout):
         self.add_widget(self.selected_file_input)
 
         self.select_button: Button = Button(
-            text='Select file',
+            text='Select',
             size_hint_y = None,
             height = 40
         )
