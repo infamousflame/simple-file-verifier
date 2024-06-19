@@ -3,6 +3,7 @@
 This currently supports the following hashing algorithms:
 * MD5
 * SHA1-3
+* BLAKE2
 """
 
 __all__ = []
