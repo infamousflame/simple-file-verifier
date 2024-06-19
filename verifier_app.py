@@ -25,7 +25,7 @@ class VerifierApp(App):
             GridLayout: The window's layout.
         """
         self.window: GridLayout = GridLayout(rows = 2, cols = 2)
-        self.title = 'File Verifier'
+        self.title = 'Simple File Verifier'
 
         self.hash_choice_pane: HashChoicePane = HashChoicePane(
             size_hint_x = None,
@@ -37,7 +37,7 @@ class VerifierApp(App):
         self.window.add_widget(self.file_choice_pane)
 
         self.calculate_button: Button = Button(
-            text = 'COMPUTE SUM',
+            text = 'COMPUTE HASH',
             size_hint = (None, None),
             size = (LEFT_SIDE_WIDTH, BOTTOM_SIDE_HEIGHT)
         )
@@ -48,7 +48,7 @@ class VerifierApp(App):
         self.window.add_widget(self.calculate_button)
 
         self.hash_sum_output: TextInput = TextInput(
-            text = 'Computed hash sum',
+            text = 'The computed hash sum will appear here.',
             size_hint_y = None,
             height = BOTTOM_SIDE_HEIGHT
         )
@@ -64,8 +64,8 @@ class VerifierApp(App):
             case 0:
                 self.hash_sum_output.text = digest[0]
             case 1:
-                self.hash_sum_output.text = 'File not found'
+                self.hash_sum_output.text = 'Error: File not found'
             case 2:
-                self.hash_sum_output.text = 'Permission denied'
+                self.hash_sum_output.text = 'Error: Permission denied'
             case 3:
                 self.hash_sum_output.text = 'Please select a file'

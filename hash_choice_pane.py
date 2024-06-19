@@ -17,7 +17,7 @@ class HashChoicePane(BoxLayout):
         self.orientation = 'vertical'
 
         self.add_widget(Label(
-            text = 'Hash algorithm',
+            text = 'Select algorithm',
             size_hint_y = None,
             height = 30
         ))

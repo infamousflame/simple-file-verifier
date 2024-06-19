@@ -33,7 +33,8 @@ class FileChoicePane(BoxLayout):
         self.add_widget(self.file_chooser)
 
         self.selected_file_input: TextInput = TextInput(
-            multiline=False,
+            text = 'Enter file path here or browse above.',
+            multiline = False,
             size_hint_y = None,
             height = 40
         )
