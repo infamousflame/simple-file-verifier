@@ -59,4 +59,11 @@ class VerifierApp(App):
 
     def update_digest_label(self) -> None:
         """Updates the hash digest label."""
-        self.hash_sum_output.text = hasher.compute_digest()
+        digest: tuple[str, int] = hasher.compute_digest()
+        match digest[1]:
+            case 0:
+                self.hash_sum_output.text = hasher.compute_digest()[0]
+            case 1:
+                self.hash_sum_output.text = 'File not found'
+            case 2:
+                self.hash_sum_output.text = 'Permission denied'

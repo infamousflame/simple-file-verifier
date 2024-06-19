@@ -68,7 +68,18 @@ class Hasher:
         self._file_path = value
 
 
-    def compute_digest(self) -> str | None:
+    def compute_digest(self) -> tuple[str, int]:
+        """Computes the file's hash digest (if possible).
+
+        Returns:
+            tuple[str, int]: The hexadecimal digest (if successful)
+            or error message (otherwise), and a status code:
+
+        Status codes:
+            0 - successful
+            1 - file not found
+            2 - permission denied
+        """
         hash_object = new_hash(self._hash_algorithm)
         try:
             with open(self._file_path, 'rb') as f:
@@ -77,9 +88,11 @@ class Hasher:
                     if not chunk:
                         break
                     hash_object.update(chunk)
-        except FileNotFoundError:
-            return None
+        except FileNotFoundError as e:
+            return str(e), 1
+        except PermissionError as e:
+            return str(e), 2
         else:
-            return hash_object.hexdigest()
+            return hash_object.hexdigest(), 0
 
 hasher = Hasher()
