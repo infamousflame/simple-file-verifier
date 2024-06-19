@@ -73,12 +73,13 @@ class Hasher:
 
         Returns:
             tuple[str, int]: The hexadecimal digest (if successful)
-            or error message (otherwise), and a status code:
+            or error message (if there was one), and a status code:
 
         Status codes:
             0 - successful
             1 - file not found
             2 - permission denied
+            3 - no file selected
         """
         hash_object = new_hash(self._hash_algorithm)
         try:
@@ -89,7 +90,10 @@ class Hasher:
                         break
                     hash_object.update(chunk)
         except FileNotFoundError as e:
-            return str(e), 1
+            if self._file_path:
+                return str(e), 1
+            else:
+                return '', 3
         except PermissionError as e:
             return str(e), 2
         else:

@@ -67,3 +67,5 @@ class VerifierApp(App):
                 self.hash_sum_output.text = 'File not found'
             case 2:
                 self.hash_sum_output.text = 'Permission denied'
+            case 3:
+                self.hash_sum_output.text = 'Please select a file'
