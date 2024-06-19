@@ -19,13 +19,13 @@ SUPPORTED_ALGORITHMS: dict[str, str] = {
     'blake2s': 'BLAKE2s'
 }
 
-DEFAULT_HASH_ALGORITHM: str = 'md5'
+DEFAULT_HASH_ALGORITHM: str = 'sha256'
 
 
 class Hasher:
     """Class that does all the hashing."""
     def __init__(self) -> None:
-        self._hash_algorithm: str = 'md5'
+        self._hash_algorithm: str = DEFAULT_HASH_ALGORITHM
         self._file_path: str = ''
 
     @property
@@ -81,19 +81,19 @@ class Hasher:
             2 - permission denied
             3 - no file selected
         """
+        if not self._file_path:
+            return '', 3
+
         hash_object = new_hash(self._hash_algorithm)
         try:
             with open(self._file_path, 'rb') as f:
-                while 1:
+                while True:
                     chunk: bytes = f.read(1024)
                     if not chunk:
                         break
                     hash_object.update(chunk)
         except FileNotFoundError as e:
-            if self._file_path:
-                return str(e), 1
-            else:
-                return '', 3
+            return str(e), 1
         except PermissionError as e:
             return str(e), 2
         else:
